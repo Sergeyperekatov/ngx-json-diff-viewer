@@ -1,0 +1,57 @@
+.diff-list-container {
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.diff-header {
+    display: flex;
+    font-weight: bold;
+    padding: 5px;
+    border-bottom: 2px solid #ddd;
+}
+
+.diff-header-item {
+    flex: 1;
+    padding: 5px;
+}
+
+.diff-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.diff-item {
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.diff-item.added {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.diff-item.changed {
+    background-color: rgba(255, 255, 0, 0.1);
+}
+
+.diff-item.removed {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.diff-column {
+    flex: 1;
+    padding: 5px;
+    word-break: break-word;
+}
+
+.diff-path {
+    font-weight: bold;
+    max-width: 20%
+}
+.diff-old-value {
+    max-width: 40%;
+}
+.diff-new-value {
+    max-width: 40%
+}

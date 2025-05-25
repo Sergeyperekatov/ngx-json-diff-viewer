@@ -1,0 +1,23 @@
+<div *ngIf="diffTree.length === 0">
+    No change
+</div>
+<div class="diff-list-container" *ngIf="diffTree.length !== 0">
+    <div class="diff-header">
+        <div class="diff-header-item">Value</div>
+        <div class="diff-header-item">Before</div>
+        <div class="diff-header-item">After</div>
+    </div>
+    <ul class="diff-list">
+        <li *ngFor="let diff of diffTree" class="diff-item" [ngClass]="diff.type">
+            <div class="diff-column diff-path">{{ diff.pathToKey?.join('/') }}</div>
+            <div class="diff-column diff-old-value">
+                <span *ngIf="diff.type !== 'added'"><pre><code>{{ diff.oldValue | json }}</code></pre></span>
+                <span *ngIf="diff.type === 'added'">-</span>
+            </div>
+            <div class="diff-column diff-new-value">
+                <span *ngIf="diff.type !== 'removed'"><pre><code>{{ diff.newValue | json }}</code></pre></span>
+                <span *ngIf="diff.type === 'removed'">-</span>
+            </div>
+        </li>
+    </ul>
+</div>

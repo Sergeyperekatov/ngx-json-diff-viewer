@@ -1,0 +1,27 @@
+{
+  "name": "ngx-json-diff-viewer",
+  "version": "1.0.2",
+  "description": "An Angular library for visualizing differences between data structures, particularly JSON.",
+  "keywords": [
+    "angular",
+    "component",
+    "json",
+    "diff",
+    "json diff",
+    "diff viewer",
+    "json viewer",
+    "data comparison",
+    "visual diff",
+    "angular component"
+  ],
+  "author": "Sergey Perekatov",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^16.2.0",
+    "@angular/core": "^16.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
