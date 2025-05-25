@@ -14,6 +14,10 @@
     "visual diff",
     "angular component"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergeyperekatov/ngx-json-diff-viewer.git"
+  },
   "author": "Sergey Perekatov",
   "license": "MIT",
   "peerDependencies": {
