@@ -17,8 +17,8 @@ interface DiffItem {
 export class NgxJsonDiffViewerComponent implements OnChanges {
 	diffTree: DiffItem[] = [];
 	
-	@Input() oldObject: string = '';
-	@Input() newObject: string = '';
+	@Input() oldObject: any = '';
+	@Input() newObject: any = '';
 	@Input() ignoreProperties: string[] = [];
 	
 	ngOnChanges(changes: SimpleChanges): void {
@@ -111,8 +111,20 @@ export class NgxJsonDiffViewerComponent implements OnChanges {
 		return true;
 	}
 	
-	formatJson(json: string): any {
-		return JSON.parse(json);
+	formatJson(data: any): any {
+		if (typeof data === 'string') {
+			try {
+				return JSON.parse(data);
+			} catch (e) {
+				console.error("Error parsing JSON string:", e);
+				return data;
+			}
+		} else if (typeof data === 'object') {
+			return data;
+		} else {
+			console.warn("Unsupported data type.  Expected string or object.");
+			return data;
+		}
 	}
 	
 	extractionChildDiff() {
