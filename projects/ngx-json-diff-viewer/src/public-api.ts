@@ -4,3 +4,4 @@
 
 export * from './lib/ngx-json-diff-viewer.component';
 export * from './lib/ngx-json-diff-viewer.module';
+export { DiffType } from './lib/ngx-json-diff-viewer.component';

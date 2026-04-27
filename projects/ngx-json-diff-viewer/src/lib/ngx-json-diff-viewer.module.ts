@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NgxJsonDiffViewerComponent } from './ngx-json-diff-viewer.component';
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -9,7 +10,8 @@ import {CommonModule} from "@angular/common";
     NgxJsonDiffViewerComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     NgxJsonDiffViewerComponent
