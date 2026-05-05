@@ -158,10 +158,6 @@
     color: #374151;
 }
 
-.toggle-btn.expanded {
-    transform: rotate(90deg);
-}
-
 /* Search highlight */
 .search-highlight {
     background: rgba(251, 191, 36, 0.3);

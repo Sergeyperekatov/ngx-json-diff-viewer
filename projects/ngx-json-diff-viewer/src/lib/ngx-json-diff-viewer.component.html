@@ -3,74 +3,36 @@
 </div>
 
 <div *ngIf="diffTree.length > 0" class="diff-list-container">
-    <!-- Search and Export Controls -->
-    <div class="controls-container">
-        <div class="search-container">
-            <input 
-                type="text" 
-                [(ngModel)]="searchQuery" 
-                (ngModelChange)="onSearchChange()"
-                placeholder="Search differences..."
-                class="search-input"
-            />
-        </div>
-        <button (click)="exportDiff()" class="export-btn">
-            Export Diff
-        </button>
-    </div>
-
     <!-- Diff Header -->
     <div class="diff-header">
-        <div class="diff-header-item">Value</div>
+        <div class="diff-header-item">Path</div>
         <div class="diff-header-item">Before</div>
         <div class="diff-header-item">After</div>
     </div>
 
     <!-- Diff List -->
     <ul class="diff-list">
-        <ng-container *ngTemplateOutlet="diffItemTemplate; context: { $implicit: filteredDiffTree, level: 0 }"></ng-container>
+        <li *ngFor="let diff of filteredDiffTree"
+            class="diff-item"
+            [ngClass]="diff.type"
+            [style.display]="diff.visible ? 'flex' : 'none'">
+
+            <!-- Diff Content -->
+            <div class="diff-column diff-path">
+                <span [innerHTML]="highlightSearch(diff.pathToKey?.join('/') || '')"></span>
+            </div>
+            <div class="diff-column diff-old-value">
+                <span *ngIf="diff.type !== 'added'">
+                    <pre [innerHTML]="highlightSearch(diff.oldValue | json)"></pre>
+                </span>
+                <span *ngIf="diff.type === 'added'">-</span>
+            </div>
+            <div class="diff-column diff-new-value">
+                <span *ngIf="diff.type !== 'removed'">
+                    <pre [innerHTML]="highlightSearch(diff.newValue | json)"></pre>
+                </span>
+                <span *ngIf="diff.type === 'removed'">-</span>
+            </div>
+        </li>
     </ul>
 </div>
-
-<!-- Recursive Diff Item Template -->
-<ng-template #diffItemTemplate let-items let-level="level">
-    <li *ngFor="let diff of items" 
-        class="diff-item" 
-        [ngClass]="diff.type" 
-        [style.padding-left]="(level * 20) + 'px'"
-        [style.display]="diff.visible ? 'flex' : 'none'">
-        
-        <!-- Toggle Button for Nested Items -->
-        <button 
-            *ngIf="diff.children && diff.children.length > 0"
-            (click)="toggleExpand(diff)"
-            class="toggle-btn"
-            [class.expanded]="diff.expanded">
-            ▶
-        </button>
-
-        <!-- Diff Content -->
-        <div class="diff-column diff-path">
-            <span [innerHTML]="highlightSearch(diff.pathToKey?.join('/'))"></span>
-        </div>
-        <div class="diff-column diff-old-value">
-            <span *ngIf="diff.type !== 'added'">
-                <pre [innerHTML]="highlightSearch(diff.oldValue | json)"></pre>
-            </span>
-            <span *ngIf="diff.type === 'added'">-</span>
-        </div>
-        <div class="diff-column diff-new-value">
-            <span *ngIf="diff.type !== 'removed'">
-                <pre [innerHTML]="highlightSearch(diff.newValue | json)"></pre>
-            </span>
-            <span *ngIf="diff.type === 'removed'">-</span>
-        </div>
-
-        <!-- Nested Diff Items -->
-        <ul class="nested-diff" 
-            *ngIf="diff.children && diff.children.length > 0 && diff.expanded"
-            [style.display]="diff.expanded ? 'block' : 'none'">
-            <ng-container *ngTemplateOutlet="diffItemTemplate; context: { $implicit: diff.children, level: level + 1 }"></ng-container>
-        </ul>
-    </li>
-</ng-template>
